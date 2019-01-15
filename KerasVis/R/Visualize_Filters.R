@@ -51,7 +51,7 @@ visualize_filter <- function(model, selected_filters, layer_names){
 
 
     }
-  
+
     stitched <- visutils$utils$stitch_images(new_images[i], cols=2L)
     plt$figure(figsize=c(20,30))
     name <- paste(layer_names[j], "",  sep="")
