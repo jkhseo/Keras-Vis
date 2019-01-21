@@ -1,3 +1,5 @@
+source("visualize_filters.R")
+source("check_and_install_package.R")
 check_and_install_package("keras")
 check_and_install_package("reticulate")
 library(reticulate)
@@ -19,7 +21,7 @@ model <- application_vgg16(weights = 'imagenet', include_top = TRUE)
 
 
 
-#model <- application_vgg16(weights = 'imagenet', include_top = TRUE)
+model <- application_vgg16(weights = 'imagenet', include_top = TRUE)
 images = collections$deque()
 selected_filters <- list(list(41L))#, 42L), list(5L,200L))
 layer_names <- list("block5_conv3")#, "predictions")
