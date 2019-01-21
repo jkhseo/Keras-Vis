@@ -1,17 +1,6 @@
-library(reticulate)
-library(keras)
-#Changing reticulate to use python 3
-reticulate::use_python(python = '/anaconda3/bin/python3', required = T)
+#Function that takes the trained keras NN, list of layer names, and list of lists
+# that contain the respective filter number that we want to visualize
 
-os <- import("os")
-kerasvis <- import("vis.visualization")
-im <- import("vis.input_modifiers")
-visutils <- import("vis.utils")
-plt <-import("matplotlib.pyplot")
-collections <- import("collections")
-
-dir.create("/images", showWarnings=FALSE)
-model <- application_vgg16(weights = 'imagenet', include_top = TRUE)
 visualize_filter <- function(model, selected_filters, layer_names){
   jitter <- list(im$Jitter(.05))
 
@@ -78,8 +67,3 @@ visualize_filter <- function(model, selected_filters, layer_names){
 
   }
 }
-model <- application_vgg16(weights = 'imagenet', include_top = TRUE)
-images = collections$deque()
-selected_filters <- list(list(41L))#, 42L), list(5L,200L))
-layer_names <- list("block5_conv3")#, "predictions")
-visualize_filter(model, selected_filters, layer_names)
