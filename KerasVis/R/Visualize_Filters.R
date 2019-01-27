@@ -28,7 +28,7 @@ visualize_filter <- function(model, selected_filters, layer_names){
     old_images$append(img)
     layer_idx <- visutils$utils$find_layer_idx(model, layer_names[[r_index]])
     for(filter_num in selected_filters[[r_index]]){
-      old_filter <- kerasvis$visualize_activation(model, layer_idx, filter_indices=filter_num, tv_weight=0L, input_modifiers=jitter, max_iter=1L)
+      old_filter <- kerasvis$visualize_activation(model, layer_idx, filter_indices=filter_num, tv_weight=0L, input_modifiers=jitter, max_iter=150L)
       filter_name <- paste(layer_names[r_index], "pre_Filter", filter_num, sep="_")
       plt$axis('off')
       plt$title(filter_name)
@@ -54,7 +54,7 @@ visualize_filter <- function(model, selected_filters, layer_names){
     new_images$append(img)
     layer_idx <- visutils$utils$find_layer_idx(model, layer_names[[r_index]])
     for(filter_num in selected_filters[[r_index]]){
-      new_filter <- kerasvis$visualize_activation(model, layer_idx, filter_indices=filter_num, seed_input=temp_layer$popleft() , input_modifiers=jitter2, max_iter=1L)
+      new_filter <- kerasvis$visualize_activation(model, layer_idx, filter_indices=filter_num, seed_input=temp_layer$popleft() , input_modifiers=jitter2)
       plt$axis('off')
       plt$title(filter_name)
       plt$imshow(new_filter)
