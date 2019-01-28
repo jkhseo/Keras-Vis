@@ -4,7 +4,8 @@
 \alias{visualize_filter}
 \title{Visualize Filter}
 \usage{
-visualize_filter(model, selected_filters, layer_names)
+visualize_filter(model, selected_filters, layer_names,
+  save_folder = "Filter_Vis")
 }
 \arguments{
 \item{model}{Keras NN object}
@@ -12,6 +13,8 @@ visualize_filter(model, selected_filters, layer_names)
 \item{selected_filters}{List of lists that contain the filter numbers that you want to visualize.}
 
 \item{layer_names}{List of layer names of the NN that you want to visualize.}
+
+\item{save_folder}{The name of the folder you want to save the images in. "Filter_Vis" is the default.}
 }
 \description{
 This function allows you to visualize the filters of a trained keras NN.
