@@ -25,3 +25,4 @@ py_version_options <- function(regex = ".*", ...) {
   versions <- do.call(py_discover_config, dots[names(dots) %in% pyconfig_args])$python_versions
   versions(grepl(regex, versions))
 }
+
