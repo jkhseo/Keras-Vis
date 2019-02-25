@@ -14,8 +14,8 @@
 # that contain the respective filter number that we want to visualize
 
 visualize_filter <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis"){
-  if(!os$path$exists(save_folder)){
-    os$mkdir(save_folder)
+  if (dir.exists(save_folder)) { # Use R functions for this - errors will be easier to debug
+    dir.create(save_folder)
   }
   jitter <- list(im$Jitter(.05))
 
@@ -58,8 +58,8 @@ visualize_filter <- function(model, selected_filters, layer_names, save_folder =
     layer_idx <- visutils$utils$find_layer_idx(model, layer_names[[r_index]])
     for(filter_num in selected_filters[[r_index]]){
       new_filter <- kerasvis$visualize_activation(model, layer_idx, filter_indices=filter_num, seed_input=temp_layer$popleft() , input_modifiers=jitter2,  max_iter=1L)
-      filter_name <- paste(layer_names[r_index], "post_Filter", filter_num, sep="_")
-      filter_name <- paste(save_folder, "/", filter_name, sep = "")
+      filter_name <- paste(layer_names[r_index], "post_Filter", filter_num, sep = "_")
+      filter_name <- file.path(save_folder, filter_name)
       plt$axis('off')
       plt$title(filter_name)
       plt$imshow(new_filter)
@@ -72,8 +72,8 @@ visualize_filter <- function(model, selected_filters, layer_names, save_folder =
     #Generating a image pallete with 4 columns for all the layers
     stitched <- visutils$utils$stitch_images(new_images[python_index], cols=4L)
     plt$figure(figsize=c(20,30))
-    filter_name <- paste(layer_names[r_index], "",  sep="")
-    filter_name <- paste(save_folder, "/", filter_name, sep = "")
+    filter_name <- paste0(layer_names[r_index])
+    filter_name <- file.path(save_folder, filter_name)
     plt$axis('off')
     plt$title(filter_name)
     plt$imshow(stitched)
