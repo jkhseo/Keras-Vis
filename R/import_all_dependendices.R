@@ -1,6 +1,7 @@
 #' Import keras-vis dependencies
 #'
 #' Creates module objects for kerasvis, matplotlib, os, and collections
+#' @export
 import_all_dependendices <- function(){
   kerasvis <<- reticulate::import("vis.visualization")
   visutils <<- reticulate::import("vis.utils")
