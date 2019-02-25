@@ -2,7 +2,7 @@
 #'
 #' Creates module objects for kerasvis, matplotlib, os, and collections
 #' @export
-import_all_dependendices <- function(){
+import_all_dependendices <- function() {
   kerasvis <<- reticulate::import("vis.visualization")
   visutils <<- reticulate::import("vis.utils")
   im <<- reticulate::import("vis.input_modifiers")
@@ -18,7 +18,6 @@ import_all_dependendices <- function(){
 #' @param ... additional arguments to py_discover_config
 #' @return character vector of python paths that are available and match regex
 py_version_options <- function(regex = ".*", ...) {
-
   callfns <- c("py_discover_config", )
   dots <- list(...)
 
