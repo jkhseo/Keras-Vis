@@ -1,4 +1,4 @@
-#' Visualize Filter
+#' visualize_activation
 #'
 #' This function allows you to visualize the filters of a trained keras NN.
 #' @param model Keras NN object
@@ -13,7 +13,7 @@
 #Function that takes the trained keras NN, list of layer names, and list of lists
 # that contain the respective filter number that we want to visualize
 
-visualize_filter <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis"){
+visualize_activation <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis"){
   if(!os$path$exists(save_folder)){
     os$mkdir(save_folder)
   }
