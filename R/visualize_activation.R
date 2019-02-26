@@ -13,15 +13,10 @@
 # Function that takes the trained keras NN, list of layer names, and list of lists
 # that contain the respective filter number that we want to visualize
 
-<<<<<<< HEAD:R/visualize_activation.R
-visualize_activation <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis"){
-  if(!os$path$exists(save_folder)){
-    os$mkdir(save_folder)
-=======
+
 visualize_filter <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis") {
   if (dir.exists(save_folder)) { # Use R functions for this - errors will be easier to debug
     dir.create(save_folder)
->>>>>>> master:R/Visualize_Filters.R
   }
   jitter <- list(im$Jitter(.05))
 
