@@ -21,6 +21,6 @@
 /*.Rcheck/
 
 # RStudio files
-^.*\.Rproj$
+*.Rproj
 .Rproj.user/
 
