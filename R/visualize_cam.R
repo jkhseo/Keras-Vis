@@ -1,4 +1,4 @@
-#' visualize_saliency
+#' visualize_cam
 #'
 #' To do
 #' @param model Keras NN object
@@ -6,12 +6,12 @@
 #' @param save_folder The name of the folder you want to save the images in. "Saliency_Map" is the default.
 #' @export
 #' @examples
-#' visualize_saliency()
-
-# Function that takes the trained keras NN and an image to see which part of the image affects the output layer the most. 
+#' visualize_cam()
 
 
-visualize_saliency <- function(model, img, save_folder = "Saliency_Map") {
+
+
+visualize_cam <- function(model, img, save_folder = "Class Activation Map") {
   if (!dir.exists(save_folder)) { 
     dir.create(save_folder)
   }
@@ -22,10 +22,10 @@ visualize_saliency <- function(model, img, save_folder = "Saliency_Map") {
   last_layer_num_filters <- temp_layer$output_shape[[2]]
   temp_layer$activation <- linear_activation
   for(filter in seq(from = 0L, to=last_layer_num_filters, by=70L)){
-    grads <- kerasvis$visualize_saliency(temp_model, layer_idx, filter_indices= filter, seed_input = img3, backprop_modifier = "guided")
+    grads <- kerasvis$visualize_cam(temp_model, layer_idx, filter_indices= filter, seed_input = img3, backprop_modifier = "guided")
     filter_name <- paste(save_folder, "/", "filter_num_", filter , sep = "")
     plt$axis("off")
-    plt$title("Saliency Prac")
+    plt$title("CAM Prac")
     plt$imshow(grads, cmap = "jet")
     plt$savefig(filter_name, bbox_inches = "tight")
     }

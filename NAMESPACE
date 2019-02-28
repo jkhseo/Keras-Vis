@@ -2,4 +2,5 @@
 
 export(import_all_dependendices)
 export(visualize_activation)
+export(visualize_cam)
 export(visualize_saliency)
