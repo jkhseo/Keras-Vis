@@ -13,21 +13,24 @@
 
 
 
-visualize_saliency <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis", num_iterations = 150L) {
-  summary(model)
-  layer_idx <- visutils$utils$find_layer_idx(model, ler_names[[r_index]])
-  img <- visutils$utils$load_img("/Users/kyungseo/Desktop/CSAFE/KerasVis/saliencytest1.jpg", target_size = c(224L,224L))
+visualize_saliency <- function(model, img, save_folder = "Saliency_Map") {
+  if (!dir.exists(save_folder)) { 
+    dir.create(save_folder)
+  }
   linear_activation <- activations$linear
+  layer_idx <- length(model$layers)-1L
   temp_model <- visutils$utils$apply_modifications(model)
-  temp_layer <- temp_model$get_layer("fc1000") 
+  temp_layer <- temp_model$get_layer(index = layer_idx)
+  last_layer_num_filters <- temp_layer$output_shape[[2]]
   temp_layer$activation <- linear_activation
-  temp_layer$activation
-  model$get_layer("fc1000")$activation
-  layer_idx <- visutils$utils$find_layer_idx(temp_model, "fc1000")
-  grads <- kerasvis$visualize_saliency(model, layer_idx, filter_indices=0L, seed_input = img, backprop_modifier = "guided")
-  mpl$use('Agg')
-  plt$imshow(grads, cmap = "jet")
-  plt$show()
-  plt$close()
+  for(filter in seq(from = 0L, to=last_layer_num_filters, by=70L)){
+    grads <- kerasvis$visualize_saliency(temp_model, layer_idx, filter_indices= filter, seed_input = img3, backprop_modifier = "guided")
+    filter_name <- paste(save_folder, "/", "filter_num_", filter , sep = "")
+    plt$axis("off")
+    plt$title("Saliency Prac")
+    plt$imshow(grads, cmap = "jet")
+    plt$savefig(filter_name, bbox_inches = "tight")
+    }
+
 }
 

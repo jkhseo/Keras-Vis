@@ -16,7 +16,7 @@
 
 
 visualize_activation <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis", num_iterations = 150L) {
-  if (!dir.exists(save_folder)) { # Use R functions for this - errors will be easier to debug
+  if (!dir.exists(save_folder)) { 
     dir.create(save_folder)
   }
   jitter <- list(im$Jitter(.05))

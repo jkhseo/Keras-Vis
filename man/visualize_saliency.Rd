@@ -4,17 +4,16 @@
 \alias{visualize_saliency}
 \title{visualize_saliency}
 \usage{
-visualize_saliency(model, selected_filters, layer_names,
-  save_folder = "Filter_Vis", num_iterations = 150L)
+visualize_saliency(model, img, save_folder = "Saliency_Map")
 }
 \arguments{
 \item{model}{Keras NN object}
 
+\item{save_folder}{The name of the folder you want to save the images in. "Filter_Vis" is the default.}
+
 \item{selected_filters}{List of lists that contain the filter numbers that you want to visualize.}
 
 \item{layer_names}{List of layer names of the NN that you want to visualize.}
-
-\item{save_folder}{The name of the folder you want to save the images in. "Filter_Vis" is the default.}
 
 \item{num_iterations}{The number of iterations in the gradient ascent step.}
 }
