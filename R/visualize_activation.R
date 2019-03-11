@@ -1,4 +1,4 @@
-#' visualize_activation
+#' Visualize an Activation Layer from a Keras Model
 #'
 #' This function allows you to visualize the filters of a trained keras NN.
 #' @param model Keras NN object
@@ -8,14 +8,12 @@
 #' @param num_iterations The number of iterations in the gradient ascent step.
 #' @export
 #' @examples
-#' visualize_activation()
+#' \dontrun{visualize_activation()}
+visualize_activation <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis", num_iterations = 150L)
 
-
-# Function that takes the trained keras NN, list of layer names, and list of lists
-# that contain the respective filter number that we want to visualize
-
-
-visualize_activation <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis", num_iterations = 150L) {
+  # Function that takes the trained keras NN, list of layer names, and list of lists
+  # that contain the respective filter number that we want to visualize
+{
   if (!dir.exists(save_folder)) { # Use R functions for this - errors will be easier to debug
     dir.create(save_folder)
   }
