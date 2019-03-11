@@ -1,20 +1,22 @@
-#' Visualize Filter
+#' visualize_activation
 #'
 #' This function allows you to visualize the filters of a trained keras NN.
 #' @param model Keras NN object
 #' @param selected_filters List of lists that contain the filter numbers that you want to visualize.
 #' @param layer_names List of layer names of the NN that you want to visualize.
 #' @param save_folder The name of the folder you want to save the images in. "Filter_Vis" is the default.
+#' @param num_iterations The number of iterations in the gradient ascent step.
 #' @export
 #' @examples
-#' visualize_filter()
+#' visualize_activation()
 
 
 # Function that takes the trained keras NN, list of layer names, and list of lists
 # that contain the respective filter number that we want to visualize
 
-visualize_filter <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis") {
-  if (dir.exists(save_folder)) { # Use R functions for this - errors will be easier to debug
+
+visualize_activation <- function(model, selected_filters, layer_names, save_folder = "Filter_Vis", num_iterations = 150L) {
+  if (!dir.exists(save_folder)) { # Use R functions for this - errors will be easier to debug
     dir.create(save_folder)
   }
   jitter <- list(im$Jitter(.05))
@@ -30,7 +32,7 @@ visualize_filter <- function(model, selected_filters, layer_names, save_folder =
     old_images$append(img)
     layer_idx <- visutils$utils$find_layer_idx(model, layer_names[[r_index]])
     for (filter_num in selected_filters[[r_index]]) {
-      old_filter <- kerasvis$visualize_activation(model, layer_idx, filter_indices = filter_num, tv_weight = 0L, input_modifiers = jitter, max_iter = 1L)
+      old_filter <- kerasvis$visualize_activation(model, layer_idx, filter_indices = filter_num, tv_weight = 0L, input_modifiers = jitter, max_iter = num_iterations)
       filter_name <- paste(layer_names[r_index], "pre_Filter", filter_num, sep = "_")
       filter_name <- paste(save_folder, "/", filter_name, sep = "")
       plt$axis("off")
@@ -55,7 +57,7 @@ visualize_filter <- function(model, selected_filters, layer_names, save_folder =
     new_images$append(img)
     layer_idx <- visutils$utils$find_layer_idx(model, layer_names[[r_index]])
     for (filter_num in selected_filters[[r_index]]) {
-      new_filter <- kerasvis$visualize_activation(model, layer_idx, filter_indices = filter_num, seed_input = temp_layer$popleft(), input_modifiers = jitter2, max_iter = 1L)
+      new_filter <- kerasvis$visualize_activation(model, layer_idx, filter_indices = filter_num, seed_input = temp_layer$popleft(), input_modifiers = jitter2, max_iter = num_iterations)
       filter_name <- paste(layer_names[r_index], "post_Filter", filter_num, sep = "_")
       filter_name <- file.path(save_folder, filter_name)
       plt$axis("off")
