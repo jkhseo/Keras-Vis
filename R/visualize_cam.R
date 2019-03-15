@@ -11,10 +11,22 @@
 
 
 
-visualize_cam <- function(model, img, save_folder = "Class Activation Map") {
+visualize_cam <- function(model, img_directory = "", img, save_folder = "Class Activation Map") {
   if (!dir.exists(save_folder)) { 
     dir.create(save_folder)
   }
+  if(img_directory  != ""){
+    input_layer = model$get_layer(index = 0L)
+    input_shape = input_layer$input_shape[2:3]
+    imgs <- vector(("list"), length(img_directory))
+    for(index in seq(1, length(img_directory), 1)){
+      imgs[[index]] <- visutils$utils$load_img(img_directory[[index]], target_size = input_shape)
+    }
+   
+  }
+  
+  )
+  
   linear_activation <- activations$linear
   layer_idx <- length(model$layers)-1L
   temp_model <- visutils$utils$apply_modifications(model)
